@@ -1,14 +1,14 @@
 # lephpduteamspeak
 
-Le cours PHP qui va bien : https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql
+Le [cours PHP](https://openclassrooms.com/courses/concevez-votre-site-web-avec-php-et-mysql) qui va bien
 
-Framework PHP pour Teamspeak :
-https://docs.planetteamspeak.com/ts3/php/framework/index.html#example7
+[Framework PHP](https://docs.planetteamspeak.com/ts3/php/framework/index.html#example7) pour Teamspeak
+
 
 **Requirements**
-- A running TeamSpeak 3 server
 - PHP 7.0
-- The TS3 PHP Framework (https://github.com/planetteamspeak/ts3phpframework)
+- [TeamSpeak 3 server](http://www.teamspeak.com/en/downloads.html#)
+- [TS3 PHP Framework](https://github.com/planetteamspeak/ts3phpframework), [doc here](https://docs.planetteamspeak.com/ts3/php/framework/index.html#example7)
 
 **Usage**
 - Run an apache2 server, create a link between /var/www and the folder where the PHP files are.
