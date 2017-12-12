@@ -1,9 +1,9 @@
 <!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <html>
-<header><title>This is title</title></header>
+<header><title>Titre intelligent</title></header>
 <body>
-Hello world
 <form method="post" action="server.php">
 Si votre équipe a déjà un channel, entrez son nom ici pour reçevoir votre mot de passe.
 <input type="text" name="nameFind" required/>
@@ -16,7 +16,7 @@ Sinon, entrez le nom et mot de passe ainsi que le jeu concerné, pour créer vot
 <select name="game" required>
     <option value="LoL">LoL</option>
     <option value="CS:GO">CS:GO</option>
-    <option value="DOTA 2">DOTA 2</option>
+    <option value="DOTA2">DOTA2</option>
     <option value="Autre">Autre</option>
 </select>
 <input type="submit" value="Go!"/>
@@ -24,11 +24,9 @@ Sinon, entrez le nom et mot de passe ainsi que le jeu concerné, pour créer vot
 <form method="post" action="admin.php">
 Pour les maîtres du jeu.
 <input type="text" name="username" required/>
-<input type="text" name="password" required/>
+<input type="password" name="password" required/>
 <input type="submit" value="Go!" required/>
 </form>
+<button onclick="window.history.back()">Go Back</button>
 </body>
-
-<p>Aujourd'hui nous sommes le <?php echo date('d/m/Y h:i:s'); ?>.</p>
-
 </html>

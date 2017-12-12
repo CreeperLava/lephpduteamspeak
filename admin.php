@@ -1,36 +1,41 @@
 <!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <html>
     <head>
-        <title>Administration du TS3</title>
+        <title>Administration TS3</title>
+    	<meta http-equiv="refresh" content="3">
     </head>
     <body>
     <?php
 	require_once("libraries/TeamSpeak3/TeamSpeak3.php");
-    if (isset($_POST['password']) AND $_POST['password'] == "root"){
+			
+    if ((isset($_POST['password']) AND $_POST['password'] == "root") OR ((isset($_COOKIE['root']) AND $_COOKIE['root'] == "root"))){
+		setcookie("root","root", time()+3600);
 		try {
-			$instance = TeamSpeak3::factory("serverquery://127.0.0.1:10011");
 			// login using serveradmin account
-			$instance->login("serveradmin", "B9WRhIPU");
-	
+			$instance = TeamSpeak3::factory("serverquery://serveradmin:B9WRhIPU@127.0.0.1:10011");
+			$ts3_VirtualServer = $instance->serverGetByPort(9987);
 			// display server information
-			echo "<table><tr>
-			<td>Server Status:</td><td class='server_online'>".$instance->virtualserver_status."</td>
-			</tr><tr>
-			<td>Server Name</td><td class='server_name'>".$instance->virtualserver_name."</td>
-			</tr><tr>
-			<td>Server Adress:</td><td class='server_adress'>".$instance->getAdapterHost()."</td>
-			</tr><tr>
-			<td>Server Uptime:</td><td class='server_uptime'>".TeamSpeak3_Helper_Convert::seconds($instance->virtualserver_uptime)."</td>
-			</tr><tr>
-			<td>Users:</td><td class='server_users'>".($instance->virtualserver_clientsonline-$instance->virtualserver_queryclientsonline)."/".$instance->virtualserver_maxclients."</td>
-			</tr><tr>
-			<td>Channels:</td><td class='server_channels'>".$instance->virtualserver_channelsonline."</td>
-			</tr><tr>
-			<td>Download:</td><td class='server_download'>".TeamSpeak3_Helper_Convert::bytes($instance->connection_filetransfer_bytes_received_total + $instance->connection_bytes_received_total)."</td>
-			</tr><tr>
-			<td>Upload:</td><td class='server_upload'>".TeamSpeak3_Helper_Convert::bytes($instance->connection_filetransfer_bytes_sent_total + $instance->connection_bytes_sent_total)."</td>
-			</tr></table>";
-		
+			echo "<p><b>Liste des channels</b></p>";
+			echo "<table><tr>";
+			foreach($ts3_VirtualServer->channelList() as $channel){
+				$level = $channel->getLevel();
+				$indent = "";
+				for ($i = 0; $i < $level; $i++) {
+					$indent .= "--";
+				}
+				echo "<td>$indent>$channel</td></tr><tr>\n";
+			}
+			echo "</tr></table>";
+
+			echo "<p><b>Informations complémentaires</b></p>";
+			echo "<table><tr>";
+			foreach($instance->getInfo() as $key => $val){
+				echo "<td>$key</td><td>$val</td></tr><tr>\n";
+			}
+			echo "</tr></table>";
+			
 			// display list of channels
 			// TODO
 		} catch(Exception $e) {
@@ -41,4 +46,5 @@
     }
     ?>
     </body>
+    <button onclick="location.href='index.php'">Go Back</button>
 </html>
