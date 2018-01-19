@@ -1,0 +1,24 @@
+
+See the guide on the web: https://github.com/Kissaki/MumPI/wiki/Installation
+or continue:
+
+Note: With the installer you should be guided through most of this. However, if you encounter problems, this may still help you fix your problems.
+
+make sure the following folders are writable:
+* MumPI
+* MumPI/tmp
+* MumPI/data
+(if you renamed MumPI, that one of course)
+
+MAKE SURE ppl can not access the data folder or files in it from the web.
+A .htaccess file is included, but depending on your webserver configuration,
+it will not be read/used or you may want to specify it in your web servers virtual host configuration.
+
+
+Check the settings.inc.php the installer creates to set up MumPI.
+
+If you don't use the default Ice IP + port (localhost), you will have to specify it in the settings file.
+Otherwise, the interface should work out of the box.
+
+For registration to work with captchas, you will need the gd php extension loaded.
+If you don't want to use the included captcha (spam protection), check the settings file.
