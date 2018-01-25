@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>Gestion de serveur</title>
+    <title>TeamSpeak3 Online</title>
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="20">
 </head>

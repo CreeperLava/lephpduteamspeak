@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Gestion du serveur</title>
+    <title>TeamSpeak3 Online</title>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
@@ -38,7 +38,7 @@
             <div class="card-body">
                 <form method="post" action="server.php">
                     <div class="form-group">
-                        <label>Créer un nouveau channel</label>
+                        <label>Créer un nouveau channel :</label>
                         <input class="form-control" placeholder="nom du serveur" type="text" name="name" required/>
                         <input class="form-control" placeholder="mot de passe" type="text" name="password" required/>
                         <select class="form-control" name="game" required>
@@ -51,18 +51,18 @@
                     </div></form>
                 <form method="post" action="server.php">
                     <div class="form-group">
-                        <label>Trouver un channel existant</label>
+                        <label>Trouver un channel existant :</label>
                         <input class="form-control" type="text" name="nameFind" placeholder="nom du serveur recherché" required/>
                         <input class="btn btn-primary btn-block" type="submit" value="Go!"/>
-                    </div></form>
-                <button onclick="window.history.back()">Go Back</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="card card-login mx-auto mt-5">
-            <div class="card-header">CORE ACCESS - CONFIDENTIAL</div>
+            <div class="card-header">KERNEL ACCESS - CONFIDENTIAL</div>
             <div class="card-body">
                 <form method="post" action="admin.php">
                     <div class="form-group">

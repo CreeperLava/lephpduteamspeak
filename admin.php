@@ -8,11 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Titre intelligent</title>
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template-->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fonhtmlhtmlt-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Page level plugin CSS-->
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom styles for this template-->
@@ -53,40 +52,37 @@ if ((isset($_POST['password']) AND $_POST['password'] == "root") OR ((isset($_CO
         <div class="card-header">
             <i class="fa fa-table"></i> Channel List</div>
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Channel</th>
-                        <th>Players/MaxPlayers</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Channel</th>
-                        <th>Players/MaxPlayers</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <?php
-                    // display server information
-                    try {
-                        foreach($ts3_VirtualServer->channelList() as $channel){
-                            $level = $channel->getLevel();
-                            $players = count($channel->clientList());
-                            $indent = "";
-                            for ($i = 0; $i < $level; $i++) {
-                                $indent .= "--";
+            <b>Channel (Players/MaxPlayers)</b>
+            <ul>
+                <?php
+                // display server information
+                try {
+                    $previous_level = 0;
+                    foreach($ts3_VirtualServer->channelList() as $channel){
+                        $level = $channel->getLevel();
+                        $counter = $level;
+                        $players = count($channel->clientList());
+
+                        if($previous_level < $level){ # on descend d'un ou plusieurs niveau(x) dans l'arborescence
+                        	while($previous_level < $counter){
+		                    	$counter--;
+		                        echo "<ul>";
                             }
-                            echo "<tr><td>$indent> $channel</td><td>$players/∞</td></tr>\n";
+                        } else if($previous_level > $level){ # on remonte
+                        	while($previous_level > $counter){
+		                    	$counter++;
+		                        echo "</ul>";
+                            }
                         }
-                    } catch(Exception $e) {
-                        echo "<p class='server_error'> ERROR: </p>".$e->getMessage();
+                        echo "<li><div style=\"display: inline\">$channel </div><div style='float: right'>($players/∞)</div></li>\n";
+
+                        $previous_level = $level;
                     }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
+                } catch(Exception $e) {
+                    echo "<p class='server_error'> ERROR: </p>".$e->getMessage();
+                }
+                ?>
+            </ul>
         </div>
         <div class="card-footer small text-muted">Dernière mise à jour <?php echo date('d/m/Y h:i:s'); ?></div>
     </div>
