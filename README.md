@@ -15,3 +15,5 @@ Le [cours PHP](https://openclassrooms.com/courses/concevez-votre-site-web-avec-p
 **Usage**
 - Run an apache2 server, create a link between /var/www and the folder where the PHP files are.
 - Or just run "php index.php" to test the PHP.
+
+Une piste pour ajouter la config mumble : https://techblog.synagila.com/2016/02/26/install-mumble-server-on-ubuntu-with-certificate-and-php-api/
