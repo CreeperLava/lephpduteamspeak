@@ -17,11 +17,10 @@ try {
 // connect and grab TeamSpeak3_Node_Host object
     $instance = TeamSpeak3::factory("serverquery://127.0.0.1:10011");
 // login using serveradmin account
-    $instance->login("serveradmin", "B9WRhIPU");
+    $instance->login("serveradmin", "PcitQ2Ra");
 // select virtual server and grab TeamSpeak3_Node_Server object
     $ts3_VirtualServer = $instance->serverGetByPort(9987);
 // grab TeamSpeak3_Node_Servergroup object
-    $group = $ts3_VirtualServer->serverGroupGetByName("Server Admin");
     $list = $ts3_VirtualServer->channelList();
 
 // get channel name from formulary
