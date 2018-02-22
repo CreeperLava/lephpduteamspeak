@@ -94,7 +94,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
    * Returns an array filled with TeamSpeak3_Node_Channel objects.
    *
    * @param  array $filter
-   * @return array
+   * @return array|TeamSpeak3_Node_Channel[]
    */
   public function channelList(array $filter = array())
   {
@@ -501,7 +501,9 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
    */
   public function channelFileInfo($cid, $cpw = "", $name = "/")
   {
-    return array_pop($this->execute("ftgetfileinfo", array("cid" => $cid, "cpw" => $cpw, "name" => $name))->toArray());
+    $info = $this->execute("ftgetfileinfo", array("cid" => $cid, "cpw" => $cpw, "name" => $name))->toArray();
+    
+    return array_pop($info);
   }
 
   /**
@@ -623,7 +625,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
    * Returns an array filled with TeamSpeak3_Node_Client objects.
    *
    * @param  array $filter
-   * @return array
+   * @return array|TeamSpeak3_Node_Client[]
    */
   public function clientList(array $filter = array())
   {
@@ -1021,7 +1023,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
    * Returns a list of server groups available.
    *
    * @param  filter $filter
-   * @return array
+   * @return array|TeamSpeak3_Node_Servergroup[]
    */
   public function serverGroupList(array $filter = array())
   {
@@ -1351,7 +1353,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
    * Returns a list of channel groups available.
    *
    * @param  array $filter
-   * @return array
+   * @return array|TeamSpeak3_Node_Channelgroup[]
    */
   public function channelGroupList(array $filter = array())
   {
@@ -2268,8 +2270,6 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
   public function delete()
   {
     $this->getParent()->serverDelete($this->getId());
-
-    unset($this);
   }
 
   /**
@@ -2413,7 +2413,7 @@ class TeamSpeak3_Node_Server extends TeamSpeak3_Node_Abstract
    * @param  TeamSpeak3_Node_Abstract $b
    * @return integer
    */
-  protected static function sortGroupList(TeamSpeak3_Node_Abstract $a, TeamSpeak3_Node_Abstract $b)
+  public static function sortGroupList(TeamSpeak3_Node_Abstract $a, TeamSpeak3_Node_Abstract $b)
   {
     if(get_class($a) != get_class($b))
     {
