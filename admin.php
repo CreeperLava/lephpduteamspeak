@@ -22,13 +22,12 @@
 <?php
 require_once("libraries/TeamSpeak3/TeamSpeak3.php");
 // login using serveradmin account
-// $password = get from script
-// $ip = get from script
 
-$instance = TeamSpeak3::factory("serverquery://127.0.0.1:10011");
-$instance->login("serveradmin", "B9WRhIPU");
+if(!session_id()) session_start();
+$instance = $_SESSION['instance'];
+
 $ts3_VirtualServer = $instance->serverGetByPort(9987);
-if ((isset($_POST['password']) AND $_POST['password'] == "Gilgalad") OR ((isset($_COOKIE['password']) AND $_COOKIE['password'] == "Gilgalad"))){
+if ((isset($_POST['password']) AND $_POST['password'] == $admin_pass) OR ((isset($_COOKIE['password']) AND $_COOKIE['password'] == $admin_pass))){
     if(isset($_POST['remove'])){
         try {
             $ts3_VirtualServer->channelDelete($ts3_VirtualServer->channelGetByName($_POST['remove']));
@@ -36,7 +35,7 @@ if ((isset($_POST['password']) AND $_POST['password'] == "Gilgalad") OR ((isset(
             echo "<p class='server_error'> ERROR: </p>".$e->getMessage();
    		}
    	}
-setcookie("password","Gilgalad", time()+3600);
+setcookie("password", $admin_pass, time()+3600);
 ?>
 
     <div class="card mb-3">

@@ -25,6 +25,26 @@
 
 <body class="bg-dark">
 
+<?php
+// set variables used by the rest of the website
+// variables are shared between all PHP files
+
+if(!session_id()) session_start();
+$password = "4jjCOMip";
+$username = "serveradmin";
+$ip = "127.0.0.1:10011";
+$port = 9987;
+$admin_pass = "Gilgalad";
+
+$instance = TeamSpeak3::factory("serverquery://".$ip);
+$instance->login($username, $password);
+$ts3_VirtualServer = $instance->serverGetByPort($port);
+$list = $ts3_VirtualServer->channelList();
+
+if(!isset($_SESSION['instance']))
+	$_SESSION['instance'] = $instance;
+?>
+
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
